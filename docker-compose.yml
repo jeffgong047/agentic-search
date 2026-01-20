@@ -1,0 +1,188 @@
+version: '3.8'
+
+services:
+  # ====================================================================
+  # Agentic Search API Service
+  # ====================================================================
+  agentic-search:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: agentic_search_api
+    ports:
+      - "8000:8000"
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - ES_HOST=elasticsearch
+      - ES_PORT=9200
+      - ES_INDEX=documents
+      - AUTO_LOAD_MOCK=true
+      - DEBUG_MODE=false
+      - PORT=8000
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
+    restart: unless-stopped
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8000/health" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+  # ====================================================================
+  # Elasticsearch for document search
+  # ====================================================================
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.11.0
+    container_name: retrieval_es
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    volumes:
+      - es_data:/usr/share/elasticsearch/data
+    healthcheck:
+      test: [ "CMD-SHELL", "curl -f http://localhost:9200/_cluster/health || exit 1" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ====================================================================
+  # PostgreSQL for knowledge graph storage (alternative to NetworkX)
+  # ====================================================================
+  postgres:
+    image: postgres:15-alpine
+    container_name: retrieval_pg
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-retrieval}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in environment or .secrets/postgres_password}
+      POSTGRES_DB: ${POSTGRES_DB:-knowledge_graph}
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+      - ./init_db.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U retrieval" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    profiles:
+      - full # Only start with --profile full
+
+  # ====================================================================
+  # Optional: Neo4j for native graph database
+  # ====================================================================
+  neo4j:
+    image: neo4j:5.13-community
+    container_name: retrieval_neo4j
+    environment:
+      NEO4J_AUTH: ${NEO4J_AUTH:-neo4j/${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}}
+    ports:
+      - "7474:7474" # Browser
+      - "7687:7687" # Bolt
+    volumes:
+      - neo4j_data:/data
+    healthcheck:
+      test: [ "CMD-SHELL", "cypher-shell -u neo4j -p retrieval123 'RETURN 1'" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    profiles:
+      - neo4j # Only start if explicitly requested
+
+  # ====================================================================
+  # Benchmark Services (Profile: benchmark)
+  # ====================================================================
+
+  # Benchmark Elasticsearch (Separate cluster)
+  benchmark-elasticsearch:
+    image: elasticsearch:8.11.0
+    container_name: legalbench_elasticsearch
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
+      - cluster.name=legalbench-cluster
+    ports:
+      - "9201:9200" # Different port
+    volumes:
+      - legalbench_es_data:/usr/share/elasticsearch/data
+    healthcheck:
+      test: [ "CMD-SHELL", "curl -f http://localhost:9200/_cluster/health || exit 1" ]
+      interval: 10s
+      retries: 10
+    profiles:
+      - benchmark
+
+  # Benchmark Postgres
+  benchmark-postgres:
+    image: postgres:15
+    container_name: legalbench_postgres
+    environment:
+      POSTGRES_DB: ${BENCH_POSTGRES_DB:-legalbench_db}
+      POSTGRES_USER: ${BENCH_POSTGRES_USER:-benchuser}
+      POSTGRES_PASSWORD: ${BENCH_POSTGRES_PASSWORD:-${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}}
+    ports:
+      - "5433:5432" # Different port
+    volumes:
+      - legalbench_pg_data:/var/lib/postgresql/data
+      - ./legalbench/init_db.sql:/docker-entrypoint-initdb.d/01_init.sql:ro
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U benchuser -d legalbench_db" ]
+      interval: 10s
+    profiles:
+      - benchmark
+
+  # Benchmark Runner
+  benchmark-runner:
+    build:
+      context: .
+      dockerfile: Dockerfile # Uses the unified Dockerfile
+    container_name: legalbench_runner
+    depends_on:
+      benchmark-elasticsearch:
+        condition: service_healthy
+      benchmark-postgres:
+        condition: service_healthy
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - ES_URL=http://benchmark-elasticsearch:9200
+      - ES_INDEX=legalbench_documents
+      - PG_HOST=benchmark-postgres
+      - PG_PORT=5432
+      - PG_DATABASE=${BENCH_POSTGRES_DB:-legalbench_db}
+      - PG_USER=${BENCH_POSTGRES_USER:-benchuser}
+      - PG_PASSWORD=${BENCH_POSTGRES_PASSWORD:-${POSTGRES_PASSWORD}}
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - ./legalbench/data:/app/legalbench/data:rw
+      - ./legalbench/results:/app/legalbench/results:rw
+      - ./legalbench/cache:/app/legalbench/cache:rw
+      - .:/app
+    command: >
+      sh -c "
+        echo 'Waiting for services...' &&
+        sleep 10 &&
+        python -m legalbench evaluate --tasks all --output /app/legalbench/results
+      "
+    profiles:
+      - benchmark
+
+volumes:
+  es_data:
+    driver: local
+  pg_data:
+    driver: local
+  neo4j_data:
+    driver: local
+  legalbench_es_data:
+    driver: local
+  legalbench_pg_data:
+    driver: local

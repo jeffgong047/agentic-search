@@ -1,0 +1,19 @@
+# Core Dependencies
+dspy-ai>=2.4.0
+langgraph>=0.2.0
+langchain>=0.1.0
+pydantic>=2.0.0
+
+# Retrieval & Search
+elasticsearch>=8.0.0
+sentence-transformers>=2.2.0
+rank-bm25>=0.2.2
+faiss-cpu>=1.7.4
+
+# Graph & Data
+networkx>=3.0
+numpy<2.0.0
+pyarrow<14.0.0
+
+# Utilities
+python-dotenv>=1.0.0

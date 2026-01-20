@@ -1,0 +1,31 @@
+# Production Requirements: Industry Meta Stack
+
+# The Brain: DSPy
+dspy-ai>=2.4.0
+
+# Data Plumbing: LlamaIndex (swappable)
+llama-index>=0.9.0
+llama-index-vector-stores-elasticsearch>=0.1.0
+
+# Retrieval Backend: Elasticsearch (does everything)
+elasticsearch>=8.0.0
+
+# Orchestration: LangGraph
+langgraph>=0.2.0
+langchain>=0.1.0
+
+# Schema Validation
+pydantic>=2.0.0
+
+# Utilities
+python-dotenv>=1.0.0
+numpy>=1.24.0
+
+# Optional: Sentence transformers for local embedding testing
+# (Remove in production if ES does embedding)
+sentence-transformers>=2.2.0
+
+# NOT INCLUDED (Deliberately):
+# - faiss-cpu (Elasticsearch has k-NN)
+# - rank-bm25 (Elasticsearch has BM25)
+# - networkx (Use PostgreSQL or ES nested docs)
