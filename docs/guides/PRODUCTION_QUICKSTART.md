@@ -137,14 +137,14 @@ agent = ProductionRetrievalAgent(
 
 # Ingest documents
 documents = [{
-    "id": "meta_qian_chen_001",
+    "id": "disney_mickey_001",
     "content": "Employment Agreement - Meta Platforms Inc. ...",
     "metadata": {"org": "Meta", "year": 2023}
 }]
 agent.ingest_documents(documents)
 
 # Search
-results = agent.search("Did Qian Chen at Meta sign a non-compete?")
+results = agent.search("Did Mickey Mouse at Meta sign a non-compete?")
 ```
 
 ### What Happens Under the Hood

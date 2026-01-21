@@ -1,5 +1,5 @@
 """
-Mock Data Generator: Creates the "Qian Chen" test dataset
+Mock Data Generator: Creates the "Mickey Mouse" test dataset
 Generates ambiguous entities to test the disambiguation capabilities
 """
 
@@ -10,29 +10,29 @@ import uuid
 class MockDataGenerator:
     """
     Generates mock legal/research documents with entity collision scenarios.
-    Creates multiple "Qian Chen" entities to test disambiguation.
+    Creates multiple "Mickey Mouse" entities to test disambiguation.
     """
 
     def __init__(self):
         """Initialize the mock data generator"""
         pass
 
-    def generate_qian_chen_dataset(self) -> List[Dict[str, Any]]:
+    def generate_mickey_mouse_dataset(self) -> List[Dict[str, Any]]:
         """
-        Generate the "Qian Chen" test dataset.
+        Generate the "Mickey Mouse" test dataset.
 
         Returns:
             List of document dicts with id, content, metadata, entities, relations
         """
         documents = []
 
-        # === GROUP 1: Qian Chen - Meta Researcher (TARGET) ===
+        # === GROUP 1: Mickey Mouse - Meta Researcher (TARGET) ===
         documents.extend(self._generate_meta_researcher_docs())
 
-        # === GROUP 2: Qian Chen - Shanghai Finance Lawyer (DISTRACTOR) ===
+        # === GROUP 2: Mickey Mouse - Shanghai Finance Lawyer (DISTRACTOR) ===
         documents.extend(self._generate_shanghai_lawyer_docs())
 
-        # === GROUP 3: Qian Chen - Generic/Student (DISTRACTOR) ===
+        # === GROUP 3: Mickey Mouse - Generic/Student (DISTRACTOR) ===
         documents.extend(self._generate_student_docs())
 
         # === GROUP 4: Anytime AI - High-Difficulty Scenario ===
@@ -44,16 +44,16 @@ class MockDataGenerator:
         return documents
 
     def _generate_meta_researcher_docs(self) -> List[Dict[str, Any]]:
-        """Generate documents for Qian Chen at Meta (the target entity)"""
+        """Generate documents for Mickey Mouse at Meta (the target entity)"""
         docs = []
 
         # Doc 1: Employment Agreement
         docs.append({
-            "id": f"meta_qian_chen_{uuid.uuid4().hex[:8]}",
+            "id": f"meta_mickey_mouse_{uuid.uuid4().hex[:8]}",
             "content": """
             Employment Agreement - Meta Platforms Inc.
 
-            Employee: Qian Chen
+            Employee: Mickey Mouse
             Position: Senior Research Scientist
             Department: AI Research Lab
             Start Date: January 15, 2023
@@ -69,7 +69,7 @@ class MockDataGenerator:
             non-compete agreements. The restriction is limited to direct competitive
             activities and does not prevent Employee from working in the broader tech industry.
 
-            Employee Signature: Qian Chen
+            Employee Signature: Mickey Mouse
             Date: January 10, 2023
             """,
             "metadata": {
@@ -77,23 +77,23 @@ class MockDataGenerator:
                 "year": 2023,
                 "type": "Employment Agreement",
                 "entities": [
-                    {"id": "qian_chen_meta", "name": "Qian Chen", "type": "person"},
+                    {"id": "mickey_mouse_meta", "name": "Mickey Mouse", "type": "person"},
                     {"id": "meta_platforms", "name": "Meta Platforms Inc.", "type": "organization"}
                 ],
                 "relations": [
-                    {"source": "qian_chen_meta", "target": "meta_platforms", "type": "employed_by"}
+                    {"source": "mickey_mouse_meta", "target": "meta_platforms", "type": "employed_by"}
                 ]
             }
         })
 
         # Doc 2: Research Publication
         docs.append({
-            "id": f"meta_qian_chen_pub_{uuid.uuid4().hex[:8]}",
+            "id": f"meta_mickey_mouse_pub_{uuid.uuid4().hex[:8]}",
             "content": """
             Research Publication - Meta AI Research
 
             Title: "Advances in Multi-Modal Content Understanding"
-            Authors: Qian Chen, Sarah Johnson, Michael Wong
+            Authors: Mickey Mouse, Sarah Johnson, Michael Wong
             Affiliation: Meta AI Research Lab, Menlo Park, CA
             Published: March 2024
 
@@ -102,7 +102,7 @@ class MockDataGenerator:
             to achieve state-of-the-art results on visual question answering and image captioning
             tasks.
 
-            Author Bio: Qian Chen is a Senior Research Scientist at Meta Platforms, specializing
+            Author Bio: Mickey Mouse is a Senior Research Scientist at Meta Platforms, specializing
             in computer vision and natural language processing. Prior to Meta, Dr. Chen completed
             their PhD at Stanford University.
             """,
@@ -111,27 +111,27 @@ class MockDataGenerator:
                 "year": 2024,
                 "type": "Research Publication",
                 "entities": [
-                    {"id": "qian_chen_meta", "name": "Qian Chen", "type": "person"},
+                    {"id": "mickey_mouse_meta", "name": "Mickey Mouse", "type": "person"},
                     {"id": "meta_platforms", "name": "Meta Platforms Inc.", "type": "organization"},
                     {"id": "sarah_johnson", "name": "Sarah Johnson", "type": "person"},
                     {"id": "michael_wong", "name": "Michael Wong", "type": "person"}
                 ],
                 "relations": [
-                    {"source": "qian_chen_meta", "target": "meta_platforms", "type": "affiliated_with"},
-                    {"source": "qian_chen_meta", "target": "sarah_johnson", "type": "co_author"},
-                    {"source": "qian_chen_meta", "target": "michael_wong", "type": "co_author"}
+                    {"source": "mickey_mouse_meta", "target": "meta_platforms", "type": "affiliated_with"},
+                    {"source": "mickey_mouse_meta", "target": "sarah_johnson", "type": "co_author"},
+                    {"source": "mickey_mouse_meta", "target": "michael_wong", "type": "co_author"}
                 ]
             }
         })
 
         # Doc 3: Internal Memo
         docs.append({
-            "id": f"meta_qian_chen_memo_{uuid.uuid4().hex[:8]}",
+            "id": f"meta_mickey_mouse_memo_{uuid.uuid4().hex[:8]}",
             "content": """
             Internal Memo - Confidential
 
             To: AI Research Team
-            From: Qian Chen, Senior Research Scientist
+            From: Mickey Mouse, Senior Research Scientist
             Date: June 5, 2024
             Re: Non-Compete Policy Clarification
 
@@ -150,7 +150,7 @@ class MockDataGenerator:
             if you have specific questions.
 
             Best,
-            Qian Chen
+            Mickey Mouse
             Meta AI Research Lab
             """,
             "metadata": {
@@ -158,11 +158,11 @@ class MockDataGenerator:
                 "year": 2024,
                 "type": "Internal Memo",
                 "entities": [
-                    {"id": "qian_chen_meta", "name": "Qian Chen", "type": "person"},
+                    {"id": "mickey_mouse_meta", "name": "Mickey Mouse", "type": "person"},
                     {"id": "meta_platforms", "name": "Meta Platforms Inc.", "type": "organization"}
                 ],
                 "relations": [
-                    {"source": "qian_chen_meta", "target": "meta_platforms", "type": "employed_by"}
+                    {"source": "mickey_mouse_meta", "target": "meta_platforms", "type": "employed_by"}
                 ]
             }
         })
@@ -170,16 +170,16 @@ class MockDataGenerator:
         return docs
 
     def _generate_shanghai_lawyer_docs(self) -> List[Dict[str, Any]]:
-        """Generate documents for Qian Chen - Shanghai Finance Lawyer (distractor)"""
+        """Generate documents for Mickey Mouse - Shanghai Finance Lawyer (distractor)"""
         docs = []
 
         # Doc 1: Legal Opinion
         docs.append({
-            "id": f"shanghai_qian_chen_{uuid.uuid4().hex[:8]}",
+            "id": f"shanghai_mickey_mouse_{uuid.uuid4().hex[:8]}",
             "content": """
             Legal Opinion - Shanghai Financial District Law Firm
 
-            Attorney: Qian Chen (陈谦)
+            Attorney: Mickey Mouse (陈谦)
             Practice Area: Corporate Finance & Securities Law
             Bar Admission: Shanghai Bar Association (2018)
 
@@ -197,7 +197,7 @@ class MockDataGenerator:
             agreements. Our firm has successfully enforced such agreements in Shanghai courts.
 
             Respectfully submitted,
-            Qian Chen, Esq.
+            Mickey Mouse, Esq.
             Shanghai Financial District Law Firm
             """,
             "metadata": {
@@ -207,33 +207,33 @@ class MockDataGenerator:
                 "location": "Shanghai",
                 "jurisdiction": "China",
                 "entities": [
-                    {"id": "qian_chen_shanghai", "name": "Qian Chen", "type": "person"},
+                    {"id": "mickey_mouse_shanghai", "name": "Mickey Mouse", "type": "person"},
                     {"id": "shanghai_law_firm", "name": "Shanghai Financial District Law Firm", "type": "organization"}
                 ],
                 "relations": [
-                    {"source": "qian_chen_shanghai", "target": "shanghai_law_firm", "type": "employed_by"}
+                    {"source": "mickey_mouse_shanghai", "target": "shanghai_law_firm", "type": "employed_by"}
                 ]
             }
         })
 
         # Doc 2: Case Brief
         docs.append({
-            "id": f"shanghai_qian_chen_case_{uuid.uuid4().hex[:8]}",
+            "id": f"shanghai_mickey_mouse_case_{uuid.uuid4().hex[:8]}",
             "content": """
             Case Brief - Shanghai Intermediate Court (2023)
 
             Case No.: (2023) 沪01民终1234号
-            Attorney for Plaintiff: Qian Chen
+            Attorney for Plaintiff: Mickey Mouse
             Matter: Non-Compete Agreement Enforcement
 
-            Attorney Qian Chen represented a major Chinese bank in enforcing a non-compete
+            Attorney Mickey Mouse represented a major Chinese bank in enforcing a non-compete
             agreement against a former executive who joined a competitor. The court ruled
             in favor of our client, awarding damages and injunctive relief.
 
             This case demonstrates the robustness of non-compete enforcement in Shanghai's
             financial sector.
 
-            Counsel: Qian Chen, Shanghai Financial District Law Firm
+            Counsel: Mickey Mouse, Shanghai Financial District Law Firm
             """,
             "metadata": {
                 "org": "Shanghai Financial District Law Firm",
@@ -242,11 +242,11 @@ class MockDataGenerator:
                 "location": "Shanghai",
                 "jurisdiction": "China",
                 "entities": [
-                    {"id": "qian_chen_shanghai", "name": "Qian Chen", "type": "person"},
+                    {"id": "mickey_mouse_shanghai", "name": "Mickey Mouse", "type": "person"},
                     {"id": "shanghai_law_firm", "name": "Shanghai Financial District Law Firm", "type": "organization"}
                 ],
                 "relations": [
-                    {"source": "qian_chen_shanghai", "target": "shanghai_law_firm", "type": "employed_by"}
+                    {"source": "mickey_mouse_shanghai", "target": "shanghai_law_firm", "type": "employed_by"}
                 ]
             }
         })
@@ -254,15 +254,15 @@ class MockDataGenerator:
         return docs
 
     def _generate_student_docs(self) -> List[Dict[str, Any]]:
-        """Generate documents for Qian Chen - Student (distractor)"""
+        """Generate documents for Mickey Mouse - Student (distractor)"""
         docs = []
 
         docs.append({
-            "id": f"student_qian_chen_{uuid.uuid4().hex[:8]}",
+            "id": f"student_mickey_mouse_{uuid.uuid4().hex[:8]}",
             "content": """
             Student Research Paper - UC Berkeley School of Law
 
-            Author: Qian Chen
+            Author: Mickey Mouse
             Course: Employment Law Seminar
             Professor: Dr. Lisa Martinez
             Date: May 2022
@@ -284,11 +284,11 @@ class MockDataGenerator:
                 "year": 2022,
                 "type": "Student Paper",
                 "entities": [
-                    {"id": "qian_chen_student", "name": "Qian Chen", "type": "person"},
+                    {"id": "mickey_mouse_student", "name": "Mickey Mouse", "type": "person"},
                     {"id": "uc_berkeley", "name": "UC Berkeley", "type": "organization"}
                 ],
                 "relations": [
-                    {"source": "qian_chen_student", "target": "uc_berkeley", "type": "student_at"}
+                    {"source": "mickey_mouse_student", "target": "uc_berkeley", "type": "student_at"}
                 ]
             }
         })
@@ -309,7 +309,7 @@ class MockDataGenerator:
             Position: Research Scientist
             Department: AI Research Lab
 
-            Sarah Johnson works closely with Qian Chen on multi-modal AI research projects.
+            Sarah Johnson works closely with Mickey Mouse on multi-modal AI research projects.
             Both are subject to Meta's standard employment agreements including confidentiality
             and limited non-compete provisions.
 
@@ -323,11 +323,11 @@ class MockDataGenerator:
                 "entities": [
                     {"id": "sarah_johnson", "name": "Sarah Johnson", "type": "person"},
                     {"id": "meta_platforms", "name": "Meta Platforms Inc.", "type": "organization"},
-                    {"id": "qian_chen_meta", "name": "Qian Chen", "type": "person"}
+                    {"id": "mickey_mouse_meta", "name": "Mickey Mouse", "type": "person"}
                 ],
                 "relations": [
                     {"source": "sarah_johnson", "target": "meta_platforms", "type": "employed_by"},
-                    {"source": "sarah_johnson", "target": "qian_chen_meta", "type": "colleague"}
+                    {"source": "sarah_johnson", "target": "mickey_mouse_meta", "type": "colleague"}
                 ]
             }
         })
@@ -345,7 +345,7 @@ class MockDataGenerator:
             
             Anytime AI, a startup founded by Stanford researchers, has raised $5M in seed funding.
             The company is led by CEO Dr. Richard Wang, former VP of Engineering at a major tech firm.
-            Joining Dr. Wang is Dr. Qian Chen as Chief Scientist. 
+            Joining Dr. Wang is Dr. Mickey Mouse as Chief Scientist. 
             
             The team specializes in agentic search and retrieval for legal professionals.
             """,
@@ -356,10 +356,10 @@ class MockDataGenerator:
                 "entities": [
                     {"id": "anytime_ai", "name": "Anytime AI", "type": "organization"},
                     {"id": "richard_wang", "name": "Richard Wang", "type": "person"},
-                    {"id": "qian_chen_anytime", "name": "Qian Chen", "type": "person"}
+                    {"id": "mickey_mouse_anytime", "name": "Mickey Mouse", "type": "person"}
                 ],
                 "relations": [
-                    {"source": "qian_chen_anytime", "target": "anytime_ai", "type": "employed_by"},
+                    {"source": "mickey_mouse_anytime", "target": "anytime_ai", "type": "employed_by"},
                     {"source": "richard_wang", "target": "anytime_ai", "type": "ceo_of"}
                 ]
             }
@@ -376,7 +376,7 @@ class MockDataGenerator:
             closely with the AI Research Lab. 
             
             Richard holds a PhD from Stanford University, where he co-authored several papers 
-            with Qian Chen on early transformer models.
+            with Mickey Mouse on early transformer models.
             """,
             "metadata": {
                 "org": "Personal Bio",
@@ -385,12 +385,12 @@ class MockDataGenerator:
                 "entities": [
                     {"id": "richard_wang", "name": "Richard Wang", "type": "person"},
                     {"id": "meta_platforms", "name": "Meta Platforms Inc.", "type": "organization"},
-                    {"id": "qian_chen_anytime", "name": "Qian Chen", "type": "person"},
+                    {"id": "mickey_mouse_anytime", "name": "Mickey Mouse", "type": "person"},
                     {"id": "stanford", "name": "Stanford University", "type": "organization"}
                 ],
                 "relations": [
                     {"source": "richard_wang", "target": "meta_platforms", "type": "formerly_employed_by"},
-                    {"source": "richard_wang", "target": "qian_chen_anytime", "type": "colleague"},
+                    {"source": "richard_wang", "target": "mickey_mouse_anytime", "type": "colleague"},
                     {"source": "richard_wang", "target": "stanford", "type": "alumnus_of"}
                 ]
             }
@@ -464,13 +464,13 @@ def get_mock_dataset() -> List[Dict[str, Any]]:
     """
     generator = MockDataGenerator()
 
-    # Generate Qian Chen collision dataset
-    qian_chen_docs = generator.generate_qian_chen_dataset()
+    # Generate Mickey Mouse collision dataset
+    mickey_mouse_docs = generator.generate_mickey_mouse_dataset()
 
     # Generate general legal docs for noise
     general_docs = generator.generate_general_legal_docs(count=20)
 
-    return qian_chen_docs + general_docs
+    return mickey_mouse_docs + general_docs
 
 
 if __name__ == "__main__":

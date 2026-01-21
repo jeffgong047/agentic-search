@@ -284,11 +284,11 @@ class SwappableIngestionDemo:
         """
         # Start with LlamaIndex
         stack_v1 = SwappableIngestionDemo.with_llamaindex()
-        results_v1 = stack_v1.search("Qian Chen Meta")
+        results_v1 = stack_v1.search("Mickey Mouse Meta")
 
         # Swap to raw ES (mentor's system)
         stack_v2 = SwappableIngestionDemo.with_raw_elasticsearch()
-        results_v2 = stack_v2.search("Qian Chen Meta")
+        results_v2 = stack_v2.search("Mickey Mouse Meta")
 
         # Agent code didn't change!
         # Only swapped the ingestion pipeline

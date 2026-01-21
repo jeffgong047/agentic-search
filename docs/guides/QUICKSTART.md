@@ -145,7 +145,7 @@ Let us know which format your evaluation scripts expect.
 ## Testing Without Real Data
 
 ```bash
-# Uses mock "Qian Chen" dataset
+# Uses mock "Mickey Mouse" dataset
 python demo.py
 
 # Test with custom documents

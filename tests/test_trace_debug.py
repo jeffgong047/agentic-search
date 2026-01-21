@@ -108,24 +108,24 @@ def test_1_simple_disambiguation():
     - Should add negative constraints for "Shanghai" and "UC Berkeley"
     """
     print_trace_header("TEST 1: Simple Entity Disambiguation",
-                       "Did Qian Chen at Meta sign a non-compete?")
+                       "Did Mickey Mouse at Meta sign a non-compete?")
 
     # Create mini dataset (just 3 docs)
     # Note: Using document_type to match orchestrator output, proper case for org
     mini_docs = [
         {
             "id": "meta_1",
-            "content": "Qian Chen joined Meta in 2023 as AI Research Scientist. Research focuses on large language models and neural networks. Employment contract includes standard non-compete clause restricting competitive employment for 1 year within 50 miles.",
+            "content": "Mickey Mouse joined Meta in 2023 as AI Research Scientist. Research focuses on large language models and neural networks. Employment contract includes standard non-compete clause restricting competitive employment for 1 year within 50 miles.",
             "metadata": {"org": "Meta", "document_type": "employment_contract", "year": 2023}
         },
         {
             "id": "shanghai_1",
-            "content": "Qian Chen practices corporate law at Shanghai Law Firm since 2020. Specializes in M&A transactions and corporate governance.",
+            "content": "Mickey Mouse practices corporate law at Shanghai Law Firm since 2020. Specializes in M&A transactions and corporate governance.",
             "metadata": {"org": "Shanghai Law Firm", "document_type": "profile", "year": 2022}
         },
         {
             "id": "student_1",
-            "content": "Qian Chen is a PhD student at UC Berkeley studying computer architecture and distributed systems.",
+            "content": "Mickey Mouse is a PhD student at UC Berkeley studying computer architecture and distributed systems.",
             "metadata": {"org": "UC Berkeley", "document_type": "bio", "year": 2024}
         }
     ]
@@ -142,7 +142,7 @@ def test_1_simple_disambiguation():
     # Test orchestrator in isolation
     print("\n📍 Step 1: Test Orchestrator (DSPy) Alone")
     orchestrator = LegalOrchestrator()
-    state = create_initial_state("Did Qian Chen at Meta sign a non-compete?")
+    state = create_initial_state("Did Mickey Mouse at Meta sign a non-compete?")
 
     plan = orchestrator.forward(state)
     print_search_plan(plan)
@@ -159,7 +159,7 @@ def test_1_simple_disambiguation():
     # Test full agent
     print("\n📍 Step 2: Test Full Agent Pipeline")
     engine = BackendAgenticSearchEngine(backend)
-    final_state = engine.search("Did Qian Chen at Meta sign a non-compete?")
+    final_state = engine.search("Did Mickey Mouse at Meta sign a non-compete?")
 
     print_agent_state_trace(final_state, final_state["step_count"])
     print_results_trace(final_state["retrieved_docs"])
@@ -190,12 +190,12 @@ def test_2_memory_evolution():
     TEST 2: Memory evolution across iterations
 
     Expected Trace:
-    - Iteration 1: Broad search, finds multiple Qian Chens
+    - Iteration 1: Broad search, finds multiple Mickey Mouses
     - Iteration 2: Refines with negative constraints
     - Should see verified_facts and negative_cache grow
     """
     print_trace_header("TEST 2: Memory Evolution (Multi-Iteration)",
-                       "What projects did Qian Chen work on?")
+                       "What projects did Mickey Mouse work on?")
 
     # Slightly larger dataset (6 docs) to trigger multi-iteration
     docs = get_mock_dataset()  # Use full mock dataset
@@ -212,7 +212,7 @@ def test_2_memory_evolution():
     os.environ["DEBUG_MODE"] = "true"
 
     engine = BackendAgenticSearchEngine(backend)
-    final_state = engine.search("What projects did Qian Chen at Meta work on?")
+    final_state = engine.search("What projects did Mickey Mouse at Meta work on?")
 
     # Detailed iteration-by-iteration trace
     print(f"\n🔍 Multi-Iteration Trace:")
@@ -300,7 +300,7 @@ def test_4_ablation_dspy_vs_raw():
     Shows why DSPy typed signatures are better than prompt hacking
     """
     print_trace_header("TEST 4: Ablation Test (DSPy vs Raw LLM)",
-                       "Who is Qian Chen?")
+                       "Who is Mickey Mouse?")
 
     docs = get_mock_dataset()[:5]  # Small set
     es_config = {
@@ -318,7 +318,7 @@ def test_4_ablation_dspy_vs_raw():
     reload_config()
 
     engine_dspy = BackendAgenticSearchEngine(backend)
-    state_dspy = engine_dspy.search("Who is Qian Chen at Meta?")
+    state_dspy = engine_dspy.search("Who is Mickey Mouse at Meta?")
 
     print(f"  Results: {len(state_dspy['retrieved_docs'])}")
     print(f"  Iterations: {state_dspy['step_count']}")
@@ -330,7 +330,7 @@ def test_4_ablation_dspy_vs_raw():
     reload_config()
 
     engine_raw = BackendAgenticSearchEngine(backend)
-    state_raw = engine_raw.search("Who is Qian Chen at Meta?")
+    state_raw = engine_raw.search("Who is Mickey Mouse at Meta?")
 
     print(f"  Results: {len(state_raw['retrieved_docs'])}")
     print(f"  Iterations: {state_raw['step_count']}")

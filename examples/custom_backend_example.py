@@ -342,7 +342,7 @@ def demo_file_based():
     agent.load_data(get_mock_dataset())
 
     # Search
-    results = agent.search("Qian Chen Meta")
+    results = agent.search("Mickey Mouse Meta")
 
     print(f"\nFound {len(results)} results using file-based backend")
     for r in results[:3]:

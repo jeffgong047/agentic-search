@@ -14,28 +14,28 @@ import dspy
 from core.config import get_config
 from main import RetrievalAgent
 
-def verify_qian_chen_disambiguation():
+def verify_mickey_mouse_disambiguation():
     """
-    Test the agent's ability to disambiguate 'Qian Chen'.
+    Test the agent's ability to disambiguate 'Mickey Mouse'.
     Checks if it correctly identifies the Meta Research Scientist and filters out distributors.
     """
     print("="*80)
-    print("VERIFYING QIAN CHEN DISAMBIGUATION (Agent Freedom Test)")
+    print("VERIFYING MICKEY MOUSE DISAMBIGUATION (Agent Freedom Test)")
     print("="*80)
 
     # 1. Initialize Agent
     # Note: RetrievalAgent uses LLM_MODEL from config
     agent = RetrievalAgent()
     
-    # 2. Load Mock Data (contains 3 Qian Chens)
+    # 2. Load Mock Data (contains 3 Mickey Mouses)
     agent.load_data()
     
     # 3. Test Queries
     queries = [
-        "What is the non-compete status for Qian Chen at Meta?",
-        "Tell me about Qian Chen's work at Anytime AI.",
-        "How is Richard Wang at Anytime AI connected to Qian Chen?",
-        "Who is Qian Chen at Berkeley?"
+        "What is the non-compete status for Mickey Mouse at Meta?",
+        "Tell me about Mickey Mouse's work at Anytime AI.",
+        "How is Richard Wang at Anytime AI connected to Mickey Mouse?",
+        "Who is Mickey Mouse at Berkeley?"
     ]
     
     for query in queries:
@@ -67,5 +67,5 @@ if __name__ == "__main__":
         print("Error: ANTHROPIC_API_KEY not set.")
         sys.exit(1)
         
-    verify_qian_chen_disambiguation()
+    verify_mickey_mouse_disambiguation()
 

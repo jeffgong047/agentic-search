@@ -82,7 +82,7 @@ agent = HighSNRAgent()
 agent.load_data()
 
 # Run a search
-results = agent.search("Did Qian Chen at Meta sign a non-compete agreement?")
+results = agent.search("Did Mickey Mouse at Meta sign a non-compete agreement?")
 
 # Print results
 for i, result in enumerate(results):
@@ -92,7 +92,7 @@ for i, result in enumerate(results):
     print(f"Content: {result.content[:200]}...")
 ```
 
-## Running the Qian Chen Test
+## Running the Mickey Mouse Test
 
 The canonical test case for entity disambiguation:
 
@@ -101,9 +101,9 @@ python main.py
 ```
 
 Expected behavior:
-- Query: "Did Qian Chen at Meta sign a non-compete agreement?"
-- Should retrieve ONLY documents about Qian Chen (Meta Researcher)
-- Should AVOID Qian Chen (Shanghai Lawyer) and Qian Chen (Student)
+- Query: "Did Mickey Mouse at Meta sign a non-compete agreement?"
+- Should retrieve ONLY documents about Mickey Mouse (Meta Researcher)
+- Should AVOID Mickey Mouse (Shanghai Lawyer) and Mickey Mouse (Student)
 
 ## Running Ablation Tests
 

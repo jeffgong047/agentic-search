@@ -155,7 +155,7 @@ class PostgreSQLGraphAdapter:
         )
 
         # Query related entities
-        related = pg_adapter.find_related_entities("qian_chen_meta", depth=2)
+        related = pg_adapter.find_related_entities("mickey_mouse_meta", depth=2)
     """
 
     def __init__(self, host: str, database: str, user: str, password: str, port: int = 5432):
@@ -368,11 +368,11 @@ def example_usage():
     )
 
     # Agent calls this internally
-    related = pg_tool.find_related_entities("qian_chen_meta", max_depth=2)
+    related = pg_tool.find_related_entities("mickey_mouse_meta", max_depth=2)
     print(f"Found {len(related)} related entities")
 
     # Get documents for entity
-    docs = pg_tool.get_entity_documents("qian_chen_meta")
+    docs = pg_tool.get_entity_documents("mickey_mouse_meta")
     print(f"Entity appears in {len(docs)} documents")
 
     pg_tool.close()

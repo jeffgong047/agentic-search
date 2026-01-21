@@ -40,18 +40,18 @@ python -c "from test_trace_debug import test_1_simple_disambiguation; test_1_sim
 ```
 🧠 DSPy Orchestrator Output:
   Intent: Entity_Resolution
-  HyDE Passage: "Qian Chen works at Meta..."
+  HyDE Passage: "Mickey Mouse works at Meta..."
   Search Queries:
-    1. "Qian Chen Meta employee non-compete"
-    2. "Meta researcher Qian Chen contract"
-    3. "Qian Chen non-compete agreement"
+    1. "Mickey Mouse Meta employee non-compete"
+    2. "Meta researcher Mickey Mouse contract"
+    3. "Mickey Mouse non-compete agreement"
   Filters: {"org": "Meta"}
 
 📚 Retrieved 1 Documents:
   [1] ID: meta_1
       Score: 0.9234
       Org: Meta
-      Content: "Qian Chen joined Meta in 2023..."
+      Content: "Mickey Mouse joined Meta in 2023..."
 ```
 
 ### TEST 2: Memory Evolution (Multi-Iteration)
@@ -70,13 +70,13 @@ python -c "from test_trace_debug import test_1_simple_disambiguation; test_1_sim
   Should Continue: False
 
   Verified Facts (3):
-    - Qian Chen works at Meta
+    - Mickey Mouse works at Meta
     - Focus area is LLMs
     - Signed non-compete for 1 year
 
   Negative Cache (2):
-    - AVOID: Qian Chen (Shanghai) (Reason: Wrong org)
-    - AVOID: Qian Chen (UC Berkeley) (Reason: Student, not employee)
+    - AVOID: Mickey Mouse (Shanghai) (Reason: Wrong org)
+    - AVOID: Mickey Mouse (UC Berkeley) (Reason: Student, not employee)
 ```
 
 ### TEST 3: DSPy Chain-of-Thought Trace
@@ -92,7 +92,7 @@ python -c "from test_trace_debug import test_1_simple_disambiguation; test_1_sim
   primary_intent: "Entity_Resolution"
 
   hyde_passage:
-    "A tech company employee named Qian Chen who works at Meta
+    "A tech company employee named Mickey Mouse who works at Meta
      Research signed a non-compete agreement as part of their
      employment contract..."
 

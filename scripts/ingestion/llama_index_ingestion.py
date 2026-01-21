@@ -182,7 +182,7 @@ def example_llamaindex_ingestion():
             "content": """
             Employment Agreement - Meta Platforms Inc.
 
-            Employee: Qian Chen
+            Employee: Mickey Mouse
             Position: Senior Research Scientist
             Department: AI Research Lab
 
@@ -201,7 +201,7 @@ def example_llamaindex_ingestion():
             "content": """
             Research Publication - Meta AI
 
-            Authors: Qian Chen, Sarah Johnson, Michael Wong
+            Authors: Mickey Mouse, Sarah Johnson, Michael Wong
             Affiliation: Meta AI Research Lab
 
             This paper presents advances in multi-modal AI...

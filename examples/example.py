@@ -21,7 +21,7 @@ def example_1_basic_search():
     agent.load_data()
 
     # Run search
-    query = "Did Qian Chen at Meta sign a non-compete agreement?"
+    query = "Did Mickey Mouse at Meta sign a non-compete agreement?"
     print(f"\nQuery: {query}\n")
 
     results = agent.search(query)
@@ -146,16 +146,16 @@ def example_4_knowledge_graph_exploration():
     print(f"  Edges: {stats['num_edges']}")
     print(f"  Entity Types: {stats['entity_types']}")
 
-    # Find entities related to "Qian Chen"
-    print("\nFinding entities related to 'Qian Chen':")
-    related = kg.find_related_entities("Qian Chen", max_depth=2)
+    # Find entities related to "Mickey Mouse"
+    print("\nFinding entities related to 'Mickey Mouse':")
+    related = kg.find_related_entities("Mickey Mouse", max_depth=2)
 
     for entity_id, distance, entity_data in related[:10]:
         print(f"  - {entity_data.get('name', entity_id)} (type: {entity_data.get('type')}, distance: {distance})")
 
     # Find path between two entities
-    print("\nFinding path between 'Qian Chen' and 'Meta Platforms':")
-    paths = kg.find_path("Qian Chen", "Meta Platforms", max_length=3)
+    print("\nFinding path between 'Mickey Mouse' and 'Meta Platforms':")
+    paths = kg.find_path("Mickey Mouse", "Meta Platforms", max_length=3)
 
     if paths:
         for i, path in enumerate(paths[:3]):
@@ -173,7 +173,7 @@ def example_5_ablation_comparison():
     agent = RetrievalAgent()
     agent.load_data()
 
-    query = "Did Qian Chen at Meta sign a non-compete agreement?"
+    query = "Did Mickey Mouse at Meta sign a non-compete agreement?"
 
     # Test with full system
     print("\n[Test 1] Full System:")

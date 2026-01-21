@@ -362,9 +362,9 @@ def example_hybrid_search():
 
     # Create search query (from DSPy orchestrator)
     query = SearchQuery(
-        text="Did Qian Chen at Meta sign a non-compete?",
-        vector_query="Qian Chen Meta Platforms non-compete agreement employment California",
-        keyword_query="Qian Chen Meta non-compete",
+        text="Did Mickey Mouse at Meta sign a non-compete?",
+        vector_query="Mickey Mouse Meta Platforms non-compete agreement employment California",
+        keyword_query="Mickey Mouse Meta non-compete",
         filters={"org": "Meta"},
         negative_constraints=["Shanghai", "Finance"],
         top_k=5

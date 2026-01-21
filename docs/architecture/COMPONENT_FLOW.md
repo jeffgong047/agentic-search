@@ -6,7 +6,7 @@
 ┌─────────────────────────────────────────────────────────────────────────┐
 │                                                                         │
 │                            USER QUERY                                   │
-│         "Did Qian Chen at Meta sign a non-compete agreement?"          │
+│         "Did Mickey Mouse at Meta sign a non-compete agreement?"          │
 │                                                                         │
 └─────────────────────────────┬───────────────────────────────────────────┘
                               │
@@ -22,7 +22,7 @@
 │  ┌───────────────────────────────────────────────────────────────────┐ │
 │  │ Chain-of-Thought Reasoning:                                       │ │
 │  │ 1. Classify intent: "Entity_Resolution"                           │ │
-│  │ 2. Generate HyDE passage: "Qian Chen employment at Meta..."       │ │
+│  │ 2. Generate HyDE passage: "Mickey Mouse employment at Meta..."       │ │
 │  │ 3. Generate 3 queries: [Lexical, Semantic, Relational]            │ │
 │  │ 4. Extract filters: {"org": "Meta"}                               │ │
 │  │ 5. Generate negative constraints: ["Shanghai", "Finance"]         │ │
@@ -39,9 +39,9 @@
 │                                                                         │
 │  SearchPlan → SearchQuery                                               │
 │  {                                                                      │
-│    text: "Did Qian Chen at Meta sign a non-compete?",                  │
-│    vector_query: "Qian Chen employed at Meta Platforms...",  (HyDE)    │
-│    keyword_query: "Qian Chen Meta non-compete",                        │
+│    text: "Did Mickey Mouse at Meta sign a non-compete?",                  │
+│    vector_query: "Mickey Mouse employed at Meta Platforms...",  (HyDE)    │
+│    keyword_query: "Mickey Mouse Meta non-compete",                        │
 │    filters: {"org": "Meta"},                                            │
 │    negative_constraints: ["Shanghai", "Finance"],                       │
 │    top_k: 5                                                             │
@@ -92,7 +92,7 @@
 ├─────────────────────────────────────────────────────────────────────────┤
 │                                                                         │
 │  [1] Score: 2.453 | Org: Meta                                          │
-│      Employment Agreement - Meta Platforms Inc. Employee: Qian Chen... │
+│      Employment Agreement - Meta Platforms Inc. Employee: Mickey Mouse... │
 │                                                                         │
 │  [2] Score: 1.892 | Org: Meta                                          │
 │      Non-Compete Clause: Employee agrees not to engage...              │
@@ -112,7 +112,7 @@
 │                          RAW DOCUMENTS                                  │
 │  [                                                                      │
 │    {                                                                    │
-│      "id": "meta_qian_chen_001",                                        │
+│      "id": "disney_mickey_001",                                        │
 │      "content": "Employment Agreement - Meta Platforms Inc. ...",       │
 │      "metadata": {"org": "Meta", "year": 2023}                          │
 │    }                                                                    │
@@ -167,17 +167,17 @@
 │                      CHUNKED DOCUMENTS                                  │
 │  [                                                                      │
 │    {                                                                    │
-│      "id": "meta_qian_chen_001_chunk_0",                                │
+│      "id": "disney_mickey_001_chunk_0",                                │
 │      "content": "Employment Agreement - Meta Platforms Inc. ...",       │
 │      "metadata": {                                                      │
 │        "org": "Meta",                                                   │
 │        "year": 2023,                                                    │
-│        "source_doc_id": "meta_qian_chen_001",                           │
+│        "source_doc_id": "disney_mickey_001",                           │
 │        "chunk_index": 0                                                 │
 │      }                                                                  │
 │    },                                                                   │
 │    {                                                                    │
-│      "id": "meta_qian_chen_001_chunk_1",                                │
+│      "id": "disney_mickey_001_chunk_1",                                │
 │      "content": "Non-Compete Clause: Employee agrees not to ...",      │
 │      "metadata": {...}                                                  │
 │    }                                                                    │

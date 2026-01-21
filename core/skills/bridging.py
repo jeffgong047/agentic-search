@@ -36,7 +36,7 @@ class BridgeSearchSkill:
     def suggest_anchors(self, target_entity: str, context_str: str) -> List[str]:
         """
         Suggests bridging queries.
-        e.g. "Qian Chen" -> ["Anytime AI CEO", "Anytime AI Founder"]
+        e.g. "Mickey Mouse" -> ["Anytime AI CEO", "Anytime AI Founder"]
         """
         anchors = []
         if "Anytime AI" in context_str:

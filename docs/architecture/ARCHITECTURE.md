@@ -4,7 +4,7 @@
 
 The High-SNR Agentic RAG is a **deterministic, measurable retrieval system** that solves two critical problems in production AI:
 
-1. **Entity Collision**: Disambiguating between entities with identical names (e.g., multiple "Qian Chen" individuals)
+1. **Entity Collision**: Disambiguating between entities with identical names (e.g., multiple "Mickey Mouse" individuals)
 2. **Infinite Loops**: Preventing agentic systems from getting stuck in unproductive search cycles
 
 ## Core Philosophy
@@ -50,7 +50,7 @@ This forces the LLM to output **structured data**, not free text. DSPy's optimiz
 
 **Location**: `retrieval/`
 
-**The Problem**: Single-index search fails on entity disambiguation because "Qian Chen (Meta)" and "Qian Chen (Shanghai)" have similar embeddings.
+**The Problem**: Single-index search fails on entity disambiguation because "Mickey Mouse (Meta)" and "Mickey Mouse (Shanghai)" have similar embeddings.
 
 **The Solution**: Three parallel indexes, each capturing different signals:
 
@@ -140,18 +140,18 @@ Where:
 
 **Location**: `memory.py`
 
-**The Problem**: Without memory, the agent will check the "wrong" Qian Chen in every loop.
+**The Problem**: Without memory, the agent will check the "wrong" Mickey Mouse in every loop.
 
 **The Solution**: **Negative Constraint Learning**
 
 After each iteration:
 1. Run a lightweight reflection (DSPy signature)
 2. Identify failed paths (e.g., "Retrieved Shanghai lawyer, but query asks for Meta researcher")
-3. Extract distinguishing attribute: `{"entity": "Qian Chen", "reason": "org=Shanghai"}`
+3. Extract distinguishing attribute: `{"entity": "Mickey Mouse", "reason": "org=Shanghai"}`
 4. Add to `negative_cache`
 
 In the next loop:
-- Orchestrator sees: "AVOID: Qian Chen (Reason: org=Shanghai)"
+- Orchestrator sees: "AVOID: Mickey Mouse (Reason: org=Shanghai)"
 - Generates search plan with: `filter_constraints: {"org": "Meta"}`
 - Or negative constraint: `negative_constraints: ["Shanghai"]`
 
@@ -159,20 +159,20 @@ Result: **Intra-session learning** without fine-tuning.
 
 ## Data Flow (Single Iteration)
 
-1. **User Query**: "Did Qian Chen at Meta sign a non-compete?"
+1. **User Query**: "Did Mickey Mouse at Meta sign a non-compete?"
 
 2. **Orchestrator**:
-   - Context: "Previous step found Qian Chen (Shanghai lawyer)"
+   - Context: "Previous step found Mickey Mouse (Shanghai lawyer)"
    - Output:
      - Intent: `Entity_Resolution`
-     - HyDE: "Qian Chen is a researcher at Meta Platforms. Her employment agreement includes..."
+     - HyDE: "Mickey Mouse is a researcher at Meta Platforms. Her employment agreement includes..."
      - Filters: `{"org": "Meta"}`
      - Negatives: `["Shanghai", "Finance"]`
 
 3. **Parallel Search** (via `Send()` API):
    - Vector: Searches using HyDE passage → 20 results
-   - BM25: Searches using "Qian Chen Meta non-compete" → 20 results
-   - Graph: Traverses from "Qian Chen" node, depth=1 → 15 results
+   - BM25: Searches using "Mickey Mouse Meta non-compete" → 20 results
+   - Graph: Traverses from "Mickey Mouse" node, depth=1 → 15 results
 
 4. **Cascade**:
    - Tier 1: Aggregates 55 unique documents
@@ -187,7 +187,7 @@ Result: **Intra-session learning** without fine-tuning.
 
 6. **Memory**:
    - Reflection: "Found 3 new Meta-related docs. Still no explicit non-compete clause."
-   - Action: Add verified fact: "Qian Chen works at Meta AI Research"
+   - Action: Add verified fact: "Mickey Mouse works at Meta AI Research"
    - Loop back to Orchestrator
 
 7. **Second Iteration**: Orchestrator now has richer context, generates more precise query...
@@ -211,7 +211,7 @@ Each major component can be toggled via `config.py`:
 ### Ablation 3: No Negative Memory
 - **Flag**: `USE_NEGATIVE_MEMORY = False`
 - **Effect**: Constraints cleared every loop
-- **Hypothesis**: Agent keeps finding wrong "Qian Chen"
+- **Hypothesis**: Agent keeps finding wrong "Mickey Mouse"
 
 ### Ablation 4: No Cascade Recall
 - **Flag**: `USE_CASCADE_RECALL = False`
@@ -251,18 +251,18 @@ agent = HighSNRAgent(use_elasticsearch=True)
 ```json
 {
   "entities": [
-    {"id": "qian_chen_meta", "name": "Qian Chen", "type": "person"},
+    {"id": "mickey_disney", "name": "Mickey Mouse", "type": "person"},
     {"id": "meta_platforms", "name": "Meta", "type": "organization"}
   ],
   "relations": [
-    {"source": "qian_chen_meta", "target": "meta_platforms", "type": "employed_by"}
+    {"source": "mickey_disney", "target": "meta_platforms", "type": "employed_by"}
   ]
 }
 ```
 
 **Reasoning**:
-- Find path: "Qian Chen" → "employed_by" → "Meta" → "published" → "Paper X"
-- Disambiguate: Two "Qian Chen" nodes, but only one connected to "Meta"
+- Find path: "Mickey Mouse" → "employed_by" → "Meta" → "published" → "Paper X"
+- Disambiguate: Two "Mickey Mouse" nodes, but only one connected to "Meta"
 
 ## Performance Characteristics
 
@@ -274,8 +274,8 @@ agent = HighSNRAgent(use_elasticsearch=True)
 
 ### Accuracy
 
-On "Qian Chen" test:
-- **Baseline RAG**: ~40% precision (retrieves all 3 Qian Chens)
+On "Mickey Mouse" test:
+- **Baseline RAG**: ~40% precision (retrieves all 3 Mickey Mouses)
 - **This system**: ~100% precision (filters to Meta Researcher only)
 
 ### Scalability

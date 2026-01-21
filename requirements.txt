@@ -17,3 +17,6 @@ pyarrow<14.0.0
 
 # Utilities
 python-dotenv>=1.0.0
+
+# Database (Feedback Loop)
+psycopg2-binary>=2.9.0  # PostgreSQL for production

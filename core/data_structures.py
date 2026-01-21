@@ -101,7 +101,7 @@ class AgentState(TypedDict):
     """Confirmed information from previous steps"""
 
     negative_cache: List[Dict[str, str]]
-    """Failed paths: [{"entity": "Qian Chen", "reason": "Wrong Industry"}]"""
+    """Failed paths: [{"entity": "Mickey Mouse", "reason": "Wrong Industry"}]"""
 
     known_doc_ids: Set[str]
     """Document IDs seen in previous iterations (for novelty calculation)"""

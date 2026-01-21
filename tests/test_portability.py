@@ -20,7 +20,7 @@ def test_tri_index_backend():
     agent = RetrievalAgent(backend_type="tri-index")
     agent.load_data(get_mock_dataset())
 
-    results = agent.search("Qian Chen Meta non-compete")
+    results = agent.search("Mickey Mouse Meta non-compete")
 
     print(f"✓ Results: {len(results)} documents")
     print(f"✓ Backend: {agent.backend.get_stats()['backend_type']}")
@@ -44,7 +44,7 @@ def test_file_based_backend():
     agent = RetrievalAgent(backend_type="file")
     agent.load_data(get_mock_dataset())
 
-    results = agent.search("Qian Chen Meta")
+    results = agent.search("Mickey Mouse Meta")
 
     print(f"✓ Results: {len(results)} documents")
     print(f"✓ Backend: {agent.backend.get_stats()['backend_type']}")
@@ -84,7 +84,7 @@ def test_same_query_different_backends():
     print("TEST 4: Same Query, Different Backends")
     print("="*60)
 
-    query = "Qian Chen Meta non-compete"
+    query = "Mickey Mouse Meta non-compete"
     backends_to_test = ["tri-index"]
 
     # Register file backend

@@ -293,7 +293,7 @@ async def index_documents(request: IndexRequest):
 
 @app.post("/index/mock", response_model=IndexResponse)
 async def index_mock_data():
-    """Load the mock dataset (Qian Chen disambiguation test)"""
+    """Load the mock dataset (Mickey Mouse disambiguation test)"""
     if not app_state.backend:
         raise HTTPException(status_code=503, detail="Backend not initialized")
     
@@ -352,13 +352,13 @@ async def get_stats():
     return app_state.backend.get_stats()
 
 
-@app.post("/test/qian-chen", response_model=Dict[str, Any])
-async def run_qian_chen_test():
+@app.post("/test/mickey-mouse", response_model=Dict[str, Any])
+async def run_disambiguation_test():
     """
-    Run the canonical Qian Chen disambiguation test
+    Run the canonical Mickey Mouse disambiguation test
     
-    Expected: Should retrieve ONLY documents about Qian Chen (Meta Researcher)
-    Should AVOID: Qian Chen (Shanghai Lawyer), Qian Chen (Student)
+    Expected: Should retrieve ONLY documents about Mickey Mouse (Meta Researcher)
+    Should AVOID: Mickey Mouse (Shanghai Lawyer), Mickey Mouse (Student)
     """
     if not app_state.is_initialized:
         raise HTTPException(
@@ -366,7 +366,7 @@ async def run_qian_chen_test():
             detail="Service not initialized. Call POST /index/mock first."
         )
     
-    query = "Did Qian Chen at Meta sign a non-compete agreement?"
+    query = "Did Mickey Mouse at Meta sign a non-compete agreement?"
     final_state = app_state.search_engine.search(query)
     
     results = final_state["retrieved_docs"]

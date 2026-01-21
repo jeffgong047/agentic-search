@@ -154,10 +154,10 @@ def demo_with_llamaindex():
     # Sample legal documents
     documents = [
         {
-            "id": "meta_qian_chen_001",
+            "id": "meta_mickey_mouse_001",
             "content": """
             Employment Agreement - Meta Platforms Inc.
-            Employee: Qian Chen
+            Employee: Mickey Mouse
             Position: Senior Research Scientist
             Department: AI Research Lab
             Start Date: January 15, 2023
@@ -174,10 +174,10 @@ def demo_with_llamaindex():
             }
         },
         {
-            "id": "shanghai_qian_chen_001",
+            "id": "shanghai_mickey_mouse_001",
             "content": """
             Legal Opinion - Shanghai Financial District Law Firm
-            Attorney: Qian Chen
+            Attorney: Mickey Mouse
             Practice Area: Corporate Finance & Securities Law
 
             Re: Non-Compete Enforcement in Chinese Employment Law
@@ -201,7 +201,7 @@ def demo_with_llamaindex():
     agent.ingest_documents(documents)
 
     # Search
-    query = "Did Qian Chen at Meta sign a non-compete agreement?"
+    query = "Did Mickey Mouse at Meta sign a non-compete agreement?"
     results = agent.search(query)
 
     # Display results
@@ -228,7 +228,7 @@ def demo_with_raw_es():
     documents = [
         {
             "id": "meta_doc_001",
-            "content": "Meta Platforms employment agreement for Qian Chen...",
+            "content": "Meta Platforms employment agreement for Mickey Mouse...",
             "metadata": {"org": "Meta", "year": 2024}
         }
     ]
@@ -240,7 +240,7 @@ def demo_with_raw_es():
     agent.ingest_documents(documents)
 
     # Search
-    results = agent.search("Qian Chen Meta")
+    results = agent.search("Mickey Mouse Meta")
 
     print(f"\n✓ Retrieved {len(results)} results using Raw ES pipeline")
 

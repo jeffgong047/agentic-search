@@ -38,12 +38,12 @@ CREATE INDEX idx_doc_entity_entity ON document_entities(entity_id);
 
 -- Sample data for testing
 INSERT INTO entities (id, name, type, attributes) VALUES
-    ('qian_chen_meta', 'Qian Chen', 'person', '{"org": "Meta", "role": "Researcher"}'),
+    ('mickey_mouse_meta', 'Mickey Mouse', 'person', '{"org": "Meta", "role": "Researcher"}'),
     ('meta_platforms', 'Meta Platforms Inc.', 'organization', '{"industry": "Tech"}'),
-    ('qian_chen_shanghai', 'Qian Chen', 'person', '{"org": "Shanghai Law Firm", "role": "Lawyer"}')
+    ('mickey_mouse_shanghai', 'Mickey Mouse', 'person', '{"org": "Shanghai Law Firm", "role": "Lawyer"}')
 ON CONFLICT (id) DO NOTHING;
 
 INSERT INTO relations (source_id, target_id, relation_type) VALUES
-    ('qian_chen_meta', 'meta_platforms', 'employed_by'),
-    ('qian_chen_shanghai', 'meta_platforms', 'unrelated_to')
+    ('mickey_mouse_meta', 'meta_platforms', 'employed_by'),
+    ('mickey_mouse_shanghai', 'meta_platforms', 'unrelated_to')
 ON CONFLICT DO NOTHING;

@@ -56,7 +56,7 @@ def demo_local_services():
 
     # Run search
     print("\nRunning search...")
-    query = "Did Qian Chen at Meta sign a non-compete agreement?"
+    query = "Did Mickey Mouse at Meta sign a non-compete agreement?"
     results = agent.search(query)
 
     # Display results
@@ -142,7 +142,7 @@ def demo_in_memory():
 
     # Run search
     print("\nRunning search...")
-    query = "Did Qian Chen at Meta sign a non-compete agreement?"
+    query = "Did Mickey Mouse at Meta sign a non-compete agreement?"
     results = agent.search(query)
 
     print(f"\nFound {len(results)} results (in-memory)")
@@ -250,7 +250,7 @@ def demo_result_formatting():
     agent = RetrievalAgent()
     agent.load_data()
 
-    query = "Qian Chen Meta non-compete"
+    query = "Mickey Mouse Meta non-compete"
     results = agent.search(query)
 
     # Format 1: List of doc IDs only
@@ -385,13 +385,13 @@ def demo_mentor_interface():
     interface.load_documents(get_mock_dataset())
 
     # Single query
-    results = interface.search("Qian Chen Meta", top_k=5)
+    results = interface.search("Mickey Mouse Meta", top_k=5)
     print(f"\nSingle query returned {len(results)} results")
     print(json.dumps(results[:2], indent=2))
 
     # Batch queries
     test_queries = [
-        {"query_id": "q001", "query_text": "Qian Chen Meta non-compete"},
+        {"query_id": "q001", "query_text": "Mickey Mouse Meta non-compete"},
         {"query_id": "q002", "query_text": "California non-compete law"}
     ]
 

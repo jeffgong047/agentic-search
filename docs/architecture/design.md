@@ -37,7 +37,7 @@ The system is an **Agentic Retrieval System** designed for high-precision legal 
     *   **Memory (`memory.py`)**: Maintains a "Negative Cache" to avoid repeating mistakes.
 
 ## Current Baseline Status
-*   **Operational:** `main.py` runs a "Qian Chen Disambiguation" test using the Monolithic Hybrid backend.
+*   **Operational:** `main.py` runs a "Mickey Mouse Disambiguation" test using the Monolithic Hybrid backend.
 *   **Testing:** `debug_trace.py` (newly added) tests the *Orchestrator's* logic traces specifically.
 *   **Ready for Optimization:** The `graph_engine.py` contains the "Map-Reduce" parallel logic requested for the "Diversity" feature, but it needs to be wired up to the Orchestrator's parallel outputs to fully realize the goal.
 

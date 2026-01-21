@@ -10,12 +10,12 @@ class TestBridgeSearchSkill(unittest.TestCase):
 
     def test_detect_bridge_need(self):
         # Scenario: Gap in info for "Anytime AI" without CEO mentioned
-        self.assertTrue(self.skill.detect_bridge_need("Who is Qian Chen at Anytime AI?", []))
+        self.assertTrue(self.skill.detect_bridge_need("Who is Mickey Mouse at Anytime AI?", []))
         # Scenario: CEO already queried, no bridge needed (naive heuristic check)
         self.assertFalse(self.skill.detect_bridge_need("Who is the CEO of Anytime AI?", []))
 
     def test_suggest_anchors(self):
-        anchors = self.skill.suggest_anchors("Qian Chen", "User asks about Anytime AI")
+        anchors = self.skill.suggest_anchors("Mickey Mouse", "User asks about Anytime AI")
         self.assertIn("Anytime AI CEO", anchors)
         self.assertIn("Anytime AI Founder", anchors)
 
@@ -36,10 +36,10 @@ class TestBridgeSearchSkill(unittest.TestCase):
             locations=["Berkeley", "New York"],
             organizations=["Meta"]
         )
-        query = self.skill.generate_constrained_query("Qian Chen", constraints)
+        query = self.skill.generate_constrained_query("Mickey Mouse", constraints)
         
         # Verify query construction
-        self.assertIn("Qian Chen", query)
+        self.assertIn("Mickey Mouse", query)
         self.assertIn("(Berkeley OR New York)", query)
         self.assertIn("(Meta)", query)
         self.assertIn(" AND ", query)

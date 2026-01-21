@@ -142,21 +142,21 @@ class RetrievalAgent:
 
         return final_state["retrieved_docs"]
 
-    def run_qian_chen_test(self) -> Dict[str, Any]:
+    def run_disambiguation_test(self) -> Dict[str, Any]:
         """
-        Run the canonical "Qian Chen" test case.
+        Run the canonical "Mickey Mouse" test case.
 
         Returns:
             Test results with metrics
         """
         print("\n" + "="*80)
-        print("RUNNING QIAN CHEN DISAMBIGUATION TEST")
+        print("RUNNING MICKEY MOUSE DISAMBIGUATION TEST")
         print("="*80)
 
-        query = "Did Qian Chen at Meta sign a non-compete agreement?"
+        query = "Did Mickey Mouse at Meta sign a non-compete agreement?"
         print(f"\nQuery: {query}")
-        print("\nExpected: Should retrieve ONLY documents about Qian Chen (Meta Researcher)")
-        print("Should AVOID: Qian Chen (Shanghai Lawyer), Qian Chen (Student)")
+        print("\nExpected: Should retrieve ONLY documents about Mickey Mouse (Meta Researcher)")
+        print("Should AVOID: Mickey Mouse (Shanghai Lawyer), Mickey Mouse (Student)")
 
         results = self.search(query)
 
@@ -229,7 +229,7 @@ class RetrievalAgent:
         print("RUNNING ABLATION TESTS")
         print("="*80)
 
-        query = "Did Qian Chen at Meta sign a non-compete agreement?"
+        query = "Did Mickey Mouse at Meta sign a non-compete agreement?"
         baseline_config = {
             "USE_DSPY_SIGNATURES": True,
             "USE_NOVELTY_CIRCUIT": True,
@@ -321,8 +321,8 @@ def main():
     # Load mock data
     agent.load_data()
 
-    # Run the Qian Chen test
-    test_results = agent.run_qian_chen_test()
+    # Run the Mickey Mouse test
+    test_results = agent.run_disambiguation_test()
 
     # Optionally run ablation tests
     if "--ablation" in sys.argv:

@@ -22,9 +22,9 @@ def load_longbench_cite(data_path: str) -> List[Dict[str, Any]]:
         print(f"Warning: Data path {data_path} not found. Using placeholder sample.")
         return [
             {
-                "query": "Who is Qian Chen and what is their affiliation with Meta?",
-                "context": ["Qian Chen is a researcher at Meta AI.", "Qian Chen is a lawyer in Shanghai."],
-                "answer": "Qian Chen is a Senior Research Scientist at Meta Platforms Inc."
+                "query": "Who is Mickey Mouse and what is their affiliation with Meta?",
+                "context": ["Mickey Mouse is a researcher at Meta AI.", "Mickey Mouse is a lawyer in Shanghai."],
+                "answer": "Mickey Mouse is a Senior Research Scientist at Meta Platforms Inc."
             }
         ]
     
